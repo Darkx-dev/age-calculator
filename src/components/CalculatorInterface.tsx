@@ -36,7 +36,7 @@ export default function CalculatorInterface() {
           </div>
         </div>
       </div>
-      <div className="flex relative items-center justify-center w-[700px] max-md:h-16 max-md:w-[80vw]">
+      <div className="flex relative items-center justify-end  max-md:justify-center w-[700px] h-32 max-md:h-16 max-md:w-[80vw]">
         <hr className="border w-full" />
         <Image
           className="bg-[#854DFF] rounded-full p-5 absolute max-md:scale-[0.8]"
