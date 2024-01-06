@@ -9,15 +9,21 @@ export default function CalculatorInterface() {
   const [month, setMonth] = useState(null);
   const [year, setYear] = useState(null);
 
+  const calculateAge = () => {};
+
   const triggerWarn = (parentNode: any, childNode: any) => {
+    parentNode.querySelector("input").style.borderColor = "#FF5757";
     parentNode.querySelector("#warn-text").hidden = false;
-    childNode.color = "red";
-    childNode.fontWeight = "bolder";
+    childNode.color = "#FF5757";
+    childNode.fontWeight = "bold";
   };
+
   const removeWarn = (parentNode: any, childNode: any) => {
+    parentNode.querySelector("input").style.borderColor = null;
+    parentNode.querySelector("#warn-text").hidden = true;
     childNode.color = null;
     childNode.fontWeight = null;
-    parentNode.querySelector("#warn-text").hidden = true;
+    childNode.borderColor = null;
   };
 
   const handleDay = (e: any) => {
@@ -30,6 +36,7 @@ export default function CalculatorInterface() {
       removeWarn(parentNode, childNode);
     }
   };
+
   const handleMonth = (e: any) => {
     let parentNode = e.target.parentNode.parentNode;
     let childNode = parentNode.querySelector("#m-label").style;
@@ -40,6 +47,7 @@ export default function CalculatorInterface() {
       removeWarn(parentNode, childNode);
     }
   };
+
   const handleYear = (e: any) => {
     let parentNode = e.target.parentNode.parentNode;
     let childNode = parentNode.querySelector("#y-label").style;
@@ -55,10 +63,12 @@ export default function CalculatorInterface() {
     <div className="shadow-2xl max-md:space-y-5 bg-white shadow-neutral-400 w-fit p-14 max-md:px-5 rounded-xl rounded-br-[200px] max-md:rounded-br-[125px]">
       <div className="flex max-md:justify-center justify-between gap-5 w-[500px] max-md:w-[85vw] text-[#716F6F] font-semibold text-xs max-md:text-md">
         <div className="space-y-1">
-          <div id="d-label">D A Y</div>
+          <div className="transition-colors" id="d-label">
+            D A Y
+          </div>
           <div>
             <input
-              className="text-black font-bold border-2 border-[#DBDBDB] p-4  rounded-md w-full text-[32px] max-md:text-xl"
+              className="text-black transition-colors outline-none font-bold border-2 border-[#DBDBDB] p-4  rounded-md w-full text-[32px] max-md:text-xl"
               type="text"
               placeholder="DD"
               onChange={handleDay}
@@ -66,17 +76,19 @@ export default function CalculatorInterface() {
           </div>
           <span
             hidden
-            className="italic text-xs font-light text-red-600"
+            className="italic text-center text-xs max-md:text-[0.6rem] font-light text-[#FF5757]"
             id="warn-text"
           >
             Must be a valid day
           </span>
         </div>
         <div className="space-y-1">
-          <div id="m-label">M O N T H</div>
+          <div className="transition-colors" id="m-label">
+            M O N T H
+          </div>
           <div>
             <input
-              className="text-black font-bold border-2 border-[#DBDBDB] p-4 rounded-md w-full text-[32px]  max-md:text-xl"
+              className="text-black transition-colors outline-none font-bold border-2 border-[#DBDBDB] p-4 rounded-md w-full text-[32px]  max-md:text-xl"
               type="text"
               placeholder="MM"
               onChange={handleMonth}
@@ -84,17 +96,19 @@ export default function CalculatorInterface() {
           </div>
           <span
             hidden
-            className="italic text-xs font-light text-red-600"
+            className="italic text-xs max-md:text-[0.6rem] font-light text-[#FF5757]"
             id="warn-text"
           >
             Must be a valid month
           </span>
         </div>
         <div className="space-y-1">
-          <div id="y-label">Y E A R</div>
+          <div className="transition-colors" id="y-label">
+            Y E A R
+          </div>
           <div>
             <input
-              className=" text-black font-bold border-2 border-[#DBDBDB] p-4 rounded-md w-full text-[32px]  max-md:text-xl"
+              className=" text-black transition-colors outline-none font-bold border-2 border-[#DBDBDB] p-4 rounded-md w-full text-[32px]  max-md:text-xl"
               type="text"
               placeholder="YYYY"
               onChange={handleYear}
@@ -102,10 +116,10 @@ export default function CalculatorInterface() {
           </div>
           <span
             hidden
-            className="italic text-xs font-light text-red-600"
+            className="italic text-xs max-md:text-[0.6rem] font-light text-[#FF5757]"
             id="warn-text"
           >
-            Must be a valid past
+            Must be in the past
           </span>
         </div>
       </div>
