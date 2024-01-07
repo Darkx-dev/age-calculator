@@ -5,12 +5,22 @@ import Image from "next/image";
 
 /* eslint-disable @next/next/no-img-element */
 export default function CalculatorInterface() {
-  const [day, setDay] = useState(null);
-  const [month, setMonth] = useState(null);
-  const [year, setYear] = useState(null);
-  const [age, setAge] = useState(Number);
+  const [day, setDay] = useState(null || "");
+  const [month, setMonth] = useState(null || "");
+  const [year, setYear] = useState(null || "");
+  const [age, setAge] = useState(null || "");
   const currentYear = 2023;
-  let d = 0;
+
+  const padStart = (
+    value: number | string,
+    targetLength: number,
+    padChar: string = "0"
+  ): string => {
+    const stringValue = String(value);
+    return stringValue.length >= targetLength
+      ? stringValue
+      : (padChar.repeat(targetLength) + stringValue).slice(-targetLength);
+  };
 
   const triggerWarn = (parentNode: any, childNode: any) => {
     parentNode.querySelector("input").style.borderColor = "#FF5757";
@@ -34,7 +44,7 @@ export default function CalculatorInterface() {
     if (e.target.value > 31) {
       triggerWarn(parentNode, childNode);
     } else {
-      setDay(e.target.value);
+      setDay(padStart(e.target.value, 2));
       removeWarn(parentNode, childNode);
     }
   };
@@ -46,7 +56,7 @@ export default function CalculatorInterface() {
     if (e.target.value > 12) {
       triggerWarn(parentNode, childNode);
     } else {
-      setMonth(e.target.value);
+      setMonth(padStart(e.target.value, 2));
       removeWarn(parentNode, childNode);
     }
   };
@@ -64,8 +74,8 @@ export default function CalculatorInterface() {
   };
 
   useEffect(() => {
-    let age = currentYear - year!;
-    setAge(age)
+    let age = padStart(currentYear - Number(year), 2);
+    setAge(age);
   }, [year]);
 
   return (
@@ -151,11 +161,15 @@ export default function CalculatorInterface() {
           <span>years</span>
         </div>
         <div className="space-x-5 max-md:space-x-3">
-          <span className="text-[#854DFF] align-top">{year ? month : "- -"}</span>
+          <span className="text-[#854DFF] align-top">
+            {year ? month : "- -"}
+          </span>
           <span>months</span>
         </div>
         <div className="space-x-5 max-md:space-x-3">
-          <span className="text-[#854DFF] align-top  ">{year ? day : "- -"}</span>
+          <span className="text-[#854DFF] align-top  ">
+            {year ? day : "- -"}
+          </span>
           <span>days</span>
         </div>
       </div>
