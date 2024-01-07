@@ -24,14 +24,14 @@ export default function CalculatorInterface() {
 
   const triggerWarn = (parentNode: any, childNode: any) => {
     parentNode.querySelector("input").style.borderColor = "#FF5757";
-    parentNode.querySelector("#warn-text").hidden = false;
+    parentNode.querySelector(".warn-text").hidden = false;
     childNode.color = "#FF5757";
     childNode.fontWeight = "bold";
   };
 
   const removeWarn = (parentNode: any, childNode: any) => {
     parentNode.querySelector("input").style.borderColor = null;
-    parentNode.querySelector("#warn-text").hidden = true;
+    parentNode.querySelector(".warn-text").hidden = true;
     childNode.color = null;
     childNode.fontWeight = null;
     childNode.borderColor = null;
@@ -95,8 +95,8 @@ export default function CalculatorInterface() {
           </div>
           <span
             hidden
-            className="italic text-center text-xs max-md:text-[0.6rem] font-light text-[#FF5757]"
-            id="warn-text"
+            className="warn-text italic text-center text-xs max-md:text-[0.6rem] font-light text-[#FF5757]"
+            
           >
             Must be a valid day
           </span>
@@ -115,8 +115,8 @@ export default function CalculatorInterface() {
           </div>
           <span
             hidden
-            className="italic text-xs max-md:text-[0.6rem] font-light text-[#FF5757]"
-            id="warn-text"
+            className="warn-text italic text-xs max-md:text-[0.6rem] font-light text-[#FF5757]"
+            
           >
             Must be a valid month
           </span>
@@ -135,8 +135,8 @@ export default function CalculatorInterface() {
           </div>
           <span
             hidden
-            className="italic text-xs max-md:text-[0.6rem] font-light text-[#FF5757]"
-            id="warn-text"
+            className="warn-text italic text-xs max-md:text-[0.6rem] font-light text-[#FF5757]"
+            
           >
             Must be in the past
           </span>
