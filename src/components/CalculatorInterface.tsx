@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 /* eslint-disable @next/next/no-img-element */
@@ -8,8 +8,9 @@ export default function CalculatorInterface() {
   const [day, setDay] = useState(null);
   const [month, setMonth] = useState(null);
   const [year, setYear] = useState(null);
-
-  const calculateAge = () => {};
+  const [age, setAge] = useState(Number);
+  const currentYear = 2023;
+  let d = 0;
 
   const triggerWarn = (parentNode: any, childNode: any) => {
     parentNode.querySelector("input").style.borderColor = "#FF5757";
@@ -33,6 +34,7 @@ export default function CalculatorInterface() {
     if (e.target.value > 31) {
       triggerWarn(parentNode, childNode);
     } else {
+      setDay(e.target.value);
       removeWarn(parentNode, childNode);
     }
   };
@@ -44,6 +46,7 @@ export default function CalculatorInterface() {
     if (e.target.value > 12) {
       triggerWarn(parentNode, childNode);
     } else {
+      setMonth(e.target.value);
       removeWarn(parentNode, childNode);
     }
   };
@@ -55,9 +58,15 @@ export default function CalculatorInterface() {
     if (e.target.value > 2024) {
       triggerWarn(parentNode, childNode);
     } else {
+      setYear(e.target.value);
       removeWarn(parentNode, childNode);
     }
   };
+
+  useEffect(() => {
+    let age = currentYear - year!;
+    setAge(age)
+  }, [year]);
 
   return (
     <div className="shadow-2xl max-md:space-y-5 bg-white shadow-neutral-400 w-fit p-14 max-md:px-5 rounded-xl rounded-br-[200px] max-md:rounded-br-[125px]">
@@ -138,15 +147,15 @@ export default function CalculatorInterface() {
         id="bottom"
       >
         <div className="space-x-5 max-md:space-x-3">
-          <span className="text-[#854DFF] align-top">- -</span>
+          <span className="text-[#854DFF] align-top">{year ? age : "- -"}</span>
           <span>years</span>
         </div>
         <div className="space-x-5 max-md:space-x-3">
-          <span className="text-[#854DFF] align-top">- -</span>
+          <span className="text-[#854DFF] align-top">{year ? month : "- -"}</span>
           <span>months</span>
         </div>
         <div className="space-x-5 max-md:space-x-3">
-          <span className="text-[#854DFF] align-top  ">- -</span>
+          <span className="text-[#854DFF] align-top  ">{year ? day : "- -"}</span>
           <span>days</span>
         </div>
       </div>
